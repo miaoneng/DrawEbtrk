@@ -15,7 +15,7 @@ class TestMain(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_read(self):
+    def passed_test_read(self):
         import main
         self.Worker = main.Worker()
         self.wb = self.Worker.wb
@@ -28,8 +28,20 @@ class TestMain(unittest.TestCase):
         return True
     
     def test_quadrant(self):
-        from draw_utils import draw_quater
-        
+        import os
+        homedir = os.environ['USERPROFILE']
+        import draw_quater
+        d = draw_quater.Quarter(100,50,25,12.5,(0,0))
+        from pprint import pprint as pp        
+        pp(d.get_pointList())
+        import shapefile
+        w = shapefile.Writer(shapefile.POLYGON)
+        w.autoBalance = 1
+        w.poly(parts=[d.get_pointList()])
+        w.field('FIRST_FLD', 'C', '40')
+        w.record('3', 'Polygon')
+        w.save(homedir + '/test')
+        return True
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
