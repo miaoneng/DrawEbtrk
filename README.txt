@@ -1,1 +1,5 @@
-Draw extended best track as a shapfile
+Draw extended best-track datasets as shapefiles.
+
+Interpolation function included.
+
+Distributed under MIT license.
